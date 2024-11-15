@@ -1,0 +1,21 @@
+# Makefile
+
+CC = gcc
+CFLAGS = -Wall -g
+TARGET = header.h
+
+SRCS = header.c main.c function.c f1.txt f2.txt f3.txt 
+OBJS = $(SRCS:.c=.o)
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+
+%.o: %.c calculator.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJS) $(TARGET)
+
+.PHONY: all clean
